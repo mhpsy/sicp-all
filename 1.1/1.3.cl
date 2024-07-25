@@ -28,6 +28,8 @@
       )
 )
 
+(defun test (a b) (+ a b))
+
 
 (print (three_num_get_two_big_sum 23 5 10))
 
