@@ -33,11 +33,12 @@
 (define (fast-expt2 b n)
   (define (fast-expt-iter b n a)
     (cond ((= n 0) a)
-          ((even? n)  (fast-expt-iter b (/ n 2) (square a))) ; (b^(n/2))^2
+          ((even? n)  (fast-expt-iter (square b) (/ n 2) a)) ; (b^(n/2))^2
           (else (fast-expt-iter b (- n 1) (* b a)))))
   (fast-expt-iter b n 1))
 
 
 (fast-expt2 2 3)
+(fast-expt2 2 4)
 
 
