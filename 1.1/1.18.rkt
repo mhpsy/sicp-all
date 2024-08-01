@@ -1,23 +1,26 @@
 #lang scheme
 
-(define (fib n)
-  (fib-iter 1 0 0 1 n))
+(define (double x)(+ x x))
 
-(define (fib-iter a b p q count)
-  (cond ((= count 0 ) b)
-        ((even? count)
-         (fib-iter a
-                   b
-                   (+ (* p p) (* q q))
-                   (+ (* 2 p q) (* q q))
-                   (/ count 2)))
-        (else (fib-iter (+ (* b q) (* a q) (* a p))
-                        (+ (* b p) (* a q))
-                        p
-                        q
-                        (- count 1)))))
+(define (halve x)
+  (cond ((even? x) (/ x 2))
+        (else (/ (- x 1) 2))))
 
-(fib 5)
-(fib 6)
-(fib 7)
-(fib 8)
+(define (even? n)(= (remainder n 2) 0))
+
+(define (times-plus x y)
+  (define (times-plus-iter x y temp)
+    (cond ((= x 1) (+ temp y))
+          ((even? x)(times-plus-iter (halve x) (double y) temp ))
+          (else (times-plus-iter (halve x) (double y) (+ temp y)))))
+  (times-plus-iter x y 0))
+
+(times-plus 2 3)
+(times-plus 2 4)
+(times-plus 2 5)
+(times-plus 2 6)
+
+(times-plus 3 3)
+(times-plus 3 4)
+(times-plus 3 5)
+(times-plus 3 6)
